@@ -3,7 +3,44 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "postgresql"
+}
+
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  sku         String   @unique
+  name        String
+  description String?
+  price       Int      // Precio en CLP (ej: 12990)
+  stock       Int      @default(0)
+  category    String?
+  imageUrl    String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  OrderItem OrderItem[]
+}
+
+model Order {
+  id            Int         @id @default(autoincrement())
+  externalId    String?     @unique
+  customerEmail String
+  totalAmount   Int         // Total ya redondeado si fue efectivo
+  status        String      @default("pending")
+  createdAt     DateTime    @default(now())
+  
+  items         OrderItem[]
+}
+
+model OrderItem {
+  id        Int     @id @default(autoincrement())
+  orderId   Int
+  productId Int
+  quantity  Int
+  price     Int     // Precio unitario en el momento de la venta
+
+  order     Order   @relation(fields: [orderId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
 }
