@@ -10,14 +10,15 @@ exports.handler = async function (event, context, callback) {
 
     // Send the request (event object) to the serverlesswp library. It includes the PHP server that allows WordPress to handle the request.
     let response = await serverlesswp({docRoot: '/tmp/wp', event: event});
-    // Check to see if the database environment variables are in place.
+    // Check to see if the database environment variables are in place. (Bypassed to allow SQLite)
+    /*
     let checkInstall = validate(response);
     
     if (checkInstall) {
         return checkInstall;
     }
-    else {
-        // Return the response for serving.
-        return response;
-    }
+    */
+    
+    // Return the response for serving.
+    return response;
 }
