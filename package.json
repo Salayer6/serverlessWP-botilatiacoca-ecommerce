@@ -11,7 +11,7 @@
     "serverlesswp": "^0.1.2"
   },
   "engines": {
-    "node": "20.x"
+    "node": "18.x"
   },
   "devDependencies": {
     "prisma": "^5.22.0"
