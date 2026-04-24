@@ -7,13 +7,13 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@prisma/client": "^7.8.0",
+    "@prisma/client": "^5.22.0",
     "serverlesswp": "^0.1.2"
   },
   "engines": {
     "node": "24.x"
   },
   "devDependencies": {
-    "prisma": "^7.8.0"
+    "prisma": "^5.22.0"
   }
 }
